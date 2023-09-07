@@ -7,6 +7,14 @@ Public Class TTT
 
     Private currentTurn As String = "X"
 
+    Private Const EMPTY_SPACE = " "
+
+    Private board(,) As String = New String(2, 2) {
+        {EMPTY_SPACE, EMPTY_SPACE, EMPTY_SPACE},
+        {EMPTY_SPACE, EMPTY_SPACE, EMPTY_SPACE},
+        {EMPTY_SPACE, EMPTY_SPACE, EMPTY_SPACE}
+    }
+
     Public Property Turn As String
         Get
             Return currentTurn
@@ -19,8 +27,15 @@ Public Class TTT
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
-    Private Sub NotifyPropertyChanged(ByVal info As String)
+    Private Sub NotifyPropertyChanged(info As String)
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(info))
     End Sub
 
+    Private Function CheckIfEmpty(row As Integer, col As Integer) As Boolean
+        Return board(row, col) = EMPTY_SPACE
+    End Function
+
+    Private Sub SetPieceToPosition(row As Integer, col As Integer)
+        board(row, col) = currentTurn
+    End Sub
 End Class
