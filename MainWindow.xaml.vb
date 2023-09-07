@@ -17,14 +17,9 @@
         Debug.WriteLine("Clicky2")
         Dim border As Border = TryCast(sender, Border)
 
-        ' Retrieve the coordinate of the mouse position.
-        Dim pt As Point = ev.GetPosition(CType(sender, UIElement))
-
-        ' Perform the hit test against a given portion of the visual object tree.
-        Dim result As HitTestResult = VisualTreeHelper.HitTest(border, pt)
-
-        If result IsNot Nothing Then
-            ' Perform action on hit visual object.
+    Private Sub Window_MouseDown(sender As Object, e As MouseButtonEventArgs)
+        If (e.ChangedButton = MouseButton.Left) Then
+            Me.DragMove()
         End If
     End Sub
 End Class
