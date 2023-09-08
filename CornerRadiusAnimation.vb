@@ -10,6 +10,7 @@ Namespace Animations
 
         Public Shared ReadOnly FromProperty As DependencyProperty = DependencyProperty.Register("From", GetType(CornerRadius), GetType(CornerRadiusAnimation))
         Public Shared ReadOnly ToProperty As DependencyProperty = DependencyProperty.Register("To", GetType(CornerRadius), GetType(CornerRadiusAnimation))
+        Public Shared ReadOnly EasingFunctionProperty As DependencyProperty = DependencyProperty.Register("EasingFunction", GetType(IEasingFunction), GetType(CornerRadiusAnimation))
 
         Public Property From As CornerRadius
             Get
@@ -26,6 +27,15 @@ Namespace Animations
             End Get
             Set(value As CornerRadius)
                 SetValue(ToProperty, value)
+            End Set
+        End Property
+
+        Public Property EasingFunction As IEasingFunction
+            Get
+                Return CType(GetValue(EasingFunctionProperty), IEasingFunction)
+            End Get
+            Set(value As IEasingFunction)
+                SetValue(EasingFunctionProperty, value)
             End Set
         End Property
 
@@ -46,6 +56,9 @@ Namespace Animations
             If IsNothing(from) OrElse IsNothing([to]) Then Return MyBase.GetCurrentValue(defaultOriginValue, defaultDestinationValue, animationClock)
 
             Dim progress = animationClock.CurrentProgress.Value
+            If Not IsNothing(EasingFunction) Then
+                EasingFunction.Ease(progress)
+            End If
             Dim topLeft = from.TopLeft + ([to].TopLeft - from.TopLeft) * progress
             Dim topRight = from.TopRight + ([to].TopRight - from.TopRight) * progress
             Dim bottomRight = from.BottomRight + ([to].BottomRight - from.BottomRight) * progress

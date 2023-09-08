@@ -10,7 +10,7 @@
             
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="10,10,10,10" />
-        <Setter Property="BorderBrush" Value="White" />
+        <Setter Property="BorderBrush" Value="#FFCECECE" />
         <Setter Property="BorderThickness" Value="1,1,1,1" />
         <Setter Property="CornerRadius" Value="{StaticResource DefaultBorderRadius}" />
         <EventSetter Event="MouseLeftButtonDown" Handler="borderOnClick" />
@@ -25,7 +25,11 @@
                                     <BackEase EasingMode="EaseInOut"/>
                                 </ThicknessAnimation.EasingFunction>
                             </ThicknessAnimation>
-                            <local:CornerRadiusAnimation Storyboard.TargetProperty="CornerRadius" From="{StaticResource DefaultBorderRadius}" To="{StaticResource OnHoverBorderRadius}" Duration="0:0:0.3"/>
+                            <local:CornerRadiusAnimation Storyboard.TargetProperty="CornerRadius" From="{StaticResource DefaultBorderRadius}" To="{StaticResource OnHoverBorderRadius}"  Duration="0:0:5">
+                                <local:CornerRadiusAnimation.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </local:CornerRadiusAnimation.EasingFunction>
+                            </local:CornerRadiusAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -37,7 +41,11 @@
                                     <BackEase EasingMode="EaseOut"/>
                                 </ThicknessAnimation.EasingFunction>
                             </ThicknessAnimation>
-                            <local:CornerRadiusAnimation Storyboard.TargetProperty="CornerRadius" From="{StaticResource OnHoverBorderRadius}" To="{StaticResource DefaultBorderRadius}" Duration="0:0:0.3"/>
+                            <local:CornerRadiusAnimation Storyboard.TargetProperty="CornerRadius" From="{StaticResource OnHoverBorderRadius}" To="{StaticResource DefaultBorderRadius}" Duration="0:0:0.3">
+                                <local:CornerRadiusAnimation.EasingFunction>
+                                    <BackEase EasingMode="EaseOut"/>
+                                </local:CornerRadiusAnimation.EasingFunction>
+                            </local:CornerRadiusAnimation>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -45,12 +53,19 @@
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
                 
-                <Setter Property="Background" Value="#ffffff"/>
+                <Setter Property="Background" Value="#FF2D3A5B"/>
             </Trigger>
             
 
         </Style.Triggers>
 
+    </Style>
+
+    <Style x:Key="TurnStyle" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Background" Value="#ffffff" />
     </Style>
 
 </ResourceDictionary>
