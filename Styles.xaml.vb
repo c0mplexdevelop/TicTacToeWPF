@@ -1,4 +1,5 @@
 ﻿Option Strict On
+Imports System.Windows.Threading
 
 Public Class Styles
 
