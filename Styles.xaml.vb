@@ -19,5 +19,42 @@ Public Class Styles
         Dim col As Integer = Grid.GetColumn(border)
 
         Debug.WriteLine($"Clicky clackity at {row}-ity {col}-ity")
+
+        If Not game.CheckIfEmpty(row, col) Then
+            Debug.WriteLine("Position taken!")
+            Return
+        End If
+
+        game.SetPieceToPosition(row, col)
+        AddLetter(border, game.Turn)
+        If game.CheckIfLetterWon() Then
+            Debug.WriteLine($"{game.Turn} Won!")
+            CloseApplicationAfterDelay()
+            Return
+        End If
+        game.SwitchTurns()
+    End Sub
+
+    Private Sub AddLetter(border As Border, currentTurn As String)
+        Dim dock As New DockPanel()
+        Dim text As New TextBlock() With {
+            .Text = currentTurn,
+            .Style = CType(window.FindResource("TurnStyle"), Style)
+        }
+        dock.Children.Add(text)
+        border.Child = dock
+
+    End Sub
+    Public Sub CloseApplicationAfterDelay()
+        Dim timer As New DispatcherTimer()
+        timer.Interval = TimeSpan.FromSeconds(2)
+        AddHandler timer.Tick, AddressOf Timer_Tick
+        timer.Start()
+    End Sub
+
+    Private Sub Timer_Tick(sender As Object, e As EventArgs)
+        Dim timer As DispatcherTimer = CType(sender, DispatcherTimer)
+        timer.Stop
+        Windows.Application.Current.Shutdown()
     End Sub
 End Class
