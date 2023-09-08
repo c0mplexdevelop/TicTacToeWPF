@@ -11,7 +11,7 @@ Namespace Animations
         Public Shared ReadOnly FromProperty As DependencyProperty = DependencyProperty.Register("From", GetType(CornerRadius), GetType(CornerRadiusAnimation))
         Public Shared ReadOnly ToProperty As DependencyProperty = DependencyProperty.Register("To", GetType(CornerRadius), GetType(CornerRadiusAnimation))
 
-        Public Property FromVar As CornerRadius
+        Public Property From As CornerRadius
             Get
                 Return CType(GetValue(FromProperty), CornerRadius)
             End Get
@@ -20,7 +20,7 @@ Namespace Animations
             End Set
         End Property
 
-        Public Property ToVar As CornerRadius
+        Public Property [To] As CornerRadius
             Get
                 Return CType(GetValue(ToProperty), CornerRadius)
             End Get
@@ -40,8 +40,8 @@ Namespace Animations
         End Function
 
         Public Overrides Function GetCurrentValue(defaultOriginValue As Object, defaultDestinationValue As Object, animationClock As AnimationClock) As Object
-            Dim from As CornerRadius = FromVar
-            Dim [to] As CornerRadius = [ToVar]
+            Dim from = Me.From
+            Dim [to] = Me.To
 
             If IsNothing(from) OrElse IsNothing([to]) Then Return MyBase.GetCurrentValue(defaultOriginValue, defaultDestinationValue, animationClock)
 
