@@ -5,13 +5,15 @@ Public Class Styles
 
     Private game As TTT
 
+    Private window As Window = Application.Current.MainWindow
+
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        game = TryCast(Application.Current.MainWindow.DataContext, TTT)
+        game = TryCast(window.DataContext, TTT)
     End Sub
 
     Private Sub borderOnClick(sender As Border, e As MouseButtonEventArgs)
