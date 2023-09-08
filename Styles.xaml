@@ -3,11 +3,16 @@
     xmlns:local="clr-namespace:TicTacToeWPF.Animations"
                     x:Class="Styles">
     <Style x:Key="ttt-Border" TargetType="Border">
+        <Style.Resources>
+            <CornerRadius x:Key="DefaultBorderRadius">10</CornerRadius>
+            <CornerRadius x:Key="OnHoverBorderRadius">0</CornerRadius>
+        </Style.Resources>
+            
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Margin" Value="10,10,10,10" />
         <Setter Property="BorderBrush" Value="White" />
         <Setter Property="BorderThickness" Value="1,1,1,1" />
-        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultBorderRadius}" />
         <EventSetter Event="MouseLeftButtonDown" Handler="borderOnClick" />
 
         <Style.Triggers>
@@ -20,7 +25,7 @@
                                     <BackEase EasingMode="EaseInOut"/>
                                 </ThicknessAnimation.EasingFunction>
                             </ThicknessAnimation>
-                            <local:CornerRadiusAnimation Storyboard.TargetProperty="CornerRadius" ToVar="0" Duration="0:0:0.3"/>
+                            <local:CornerRadiusAnimation Storyboard.TargetProperty="CornerRadius" From="{StaticResource DefaultBorderRadius}" To="{StaticResource OnHoverBorderRadius}" Duration="0:0:0.3"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -32,7 +37,7 @@
                                     <BackEase EasingMode="EaseOut"/>
                                 </ThicknessAnimation.EasingFunction>
                             </ThicknessAnimation>
-                            <local:CornerRadiusAnimation Storyboard.TargetProperty="CornerRadius" ToVar="10" Duration="0:0:0.3"/>
+                            <local:CornerRadiusAnimation Storyboard.TargetProperty="CornerRadius" From="{StaticResource OnHoverBorderRadius}" To="{StaticResource DefaultBorderRadius}" Duration="0:0:0.3"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
