@@ -31,11 +31,11 @@ Public Class TTT
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(info))
     End Sub
 
-    Private Function CheckIfEmpty(row As Integer, col As Integer) As Boolean
+    Public Function CheckIfEmpty(row As Integer, col As Integer) As Boolean
         Return board(row, col) = EMPTY_SPACE
     End Function
 
-    Private Sub SetPieceToPosition(row As Integer, col As Integer)
+    Public Sub SetPieceToPosition(row As Integer, col As Integer)
         board(row, col) = currentTurn
     End Sub
 End Class
