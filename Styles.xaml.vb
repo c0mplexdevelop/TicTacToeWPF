@@ -13,9 +13,9 @@ Public Class Styles
         game = TryCast(Application.Current.MainWindow.DataContext, TTT)
     End Sub
 
-    Private Sub borderOnClick(sender As Object, e As MouseButtonEventArgs)
-        Dim border As Border = TryCast(sender, Border)
-        Dim row As Integer = Grid.GetRow(border)
+    Private Sub borderOnClick(sender As Border, e As MouseButtonEventArgs)
+        Dim border As Border = sender
+        Dim row As Integer = Grid.GetRow(border) - 2
         Dim col As Integer = Grid.GetColumn(border)
 
         Debug.WriteLine($"Clicky clackity at {row}-ity {col}-ity")
